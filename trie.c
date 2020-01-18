@@ -34,10 +34,10 @@ return n;
 node* insert(node *n, char c){
 
   
-    node *no = newnode(c);
+
 	
 if(n->children[c-'a'] == NULL)
- {
+ {    node *no = newnode(c);
 
 
     n->children[c-'a'] = no;
@@ -51,6 +51,7 @@ if(n->children[c-'a'] == NULL)
 
 int isleaf(node* n)
 {
+
 for(int i=0;i<NUM_LETTERS;i++)
 if(n->children[i]!=NULL)
  return 0;
@@ -64,15 +65,16 @@ void freetrie(node* n)
 if(n==NULL)
 return;
 
-if(isleaf(n)==1)
+if(isleaf(n))
 {
-free(n);
-return;
+  free(n);
+   return;
 }
+
 
 for(int i=0;i<NUM_LETTERS;i++)
 {
-   if(n->children[i]!=NULL)
+   
       freetrie(n->children[i]);
 }
 free(n);
